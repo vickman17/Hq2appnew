@@ -1,6 +1,6 @@
 import React from "react";
 
-const PendingJobs: Reac.FC =()=>{
+const PendingJobs: React.FC =()=>{
 
     return(
         <div>

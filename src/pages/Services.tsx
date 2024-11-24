@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonPage, IonIcon, IonModal, IonList, IonItem, IonSkeletonText } from '@ionic/react';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+  IonPage,
+  IonIcon,
+  IonModal,
+  IonList,
+  IonItem,
+  IonSkeletonText,
+} from '@ionic/react';
 import style from './style/Services.module.css';
 import { chevronBack, search } from 'ionicons/icons';
 import BottomNav from '../components/BottomNav';
@@ -12,12 +23,17 @@ interface Category {
   id: number;
   category_name: string;
   category_pics: string;
-  supervisor_id: number; // added supervisor_id to the category
+  supervisor_id: number;
 }
 
 interface Subcategory {
   id: number;
   subcategory_name: string;
+}
+
+interface RouteParams {
+  serviceId?: string;
+  subcategoryId?: string;
 }
 
 const fetchCategories = async (): Promise<Category[]> => {
@@ -38,13 +54,12 @@ const Services: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const [subcategories, setSubcategories] = useState<Subcategory[]>([]);
-  const history = useHistory(); // Move useHistory to the top
+  const history = useHistory();
 
-  // Fetching service and subcategory from location state or params
-  const location = useLocation();
-  const { serviceId, subcategoryId } = useParams();
-  const userDetails = sessionStorage.getItem("userInfo");
-  const parsedData = JSON.parse(userDetails);
+  const location = useLocation<{ serviceName?: string; subcategoryName?: string }>();
+  const { serviceId, subcategoryId } = useParams<RouteParams>();
+  const userDetails = sessionStorage.getItem('userInfo');
+  const parsedData = userDetails ? JSON.parse(userDetails) : null;
   const [serviceName, setServiceName] = useState<string | null>(null);
   const [subcategoryName, setSubcategoryName] = useState<string | null>(null);
 
@@ -58,17 +73,15 @@ const Services: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.fontFamily = "Varela Round, sans-serif";
-    document.body.style.overflowX = "hidden";
+    document.body.style.fontFamily = 'Varela Round, sans-serif';
+    document.body.style.overflowX = 'hidden';
   }, []);
 
   useEffect(() => {
-    // Dynamically set service and subcategory names from location state or params
     if (location.state) {
       setServiceName(location.state.serviceName || null);
       setSubcategoryName(location.state.subcategoryName || null);
     } else if (serviceId && subcategoryId) {
-      // Fallback to use params if available
       setServiceName(`Service ID: ${serviceId}`);
       setSubcategoryName(`Subcategory ID: ${subcategoryId}`);
     }
@@ -91,19 +104,31 @@ const Services: React.FC = () => {
   };
 
   const handleSubcategoryClick = (subcategory: Subcategory) => {
-    // Open chat with the supervisor associated with the category
     if (selectedCategory) {
-      openChatWithSupervisor(selectedCategory.supervisor_id, selectedCategory.category_name, subcategory.subcategory_name); // Now you can call the function
+      openChatWithSupervisor(
+        selectedCategory.supervisor_id,
+        selectedCategory.category_name,
+        subcategory.subcategory_name
+      );
     }
     setShowModal(false);
   };
 
-  const openChatWithSupervisor = async (supervisorId: number, categoryName: string, subcategoryName: string) => {
+  const openChatWithSupervisor = async (
+    supervisorId: number,
+    categoryName: string,
+    subcategoryName: string
+  ) => {
+    if (!parsedData) {
+      console.error('User details not found in session storage');
+      return;
+    }
+
     const chatName = categoryName;
-    const senderName = parsedData.firstName; // Replace with dynamic sender's name
-    const senderId = parsedData.id;// Replace with dynamic sender's ID
+    const senderName = parsedData.firstName || 'Anonymous';
+    const senderId = parsedData.id || 0;
     const subChatName = subcategoryName;
-    // Save chat info to the database
+
     try {
       const response = await fetch('https://globalbills.com.ng/api/saveChat.php', {
         method: 'POST',
@@ -116,21 +141,18 @@ const Services: React.FC = () => {
           receiverId: supervisorId,
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to save chat');
       }
-  
+
       console.log('Chat saved successfully');
     } catch (error) {
       console.error('Error saving chat:', error);
     }
-  
-    // Navigate to the chat page
+
     history.push(`/chat/${supervisorId}`, { chatName, subChatName });
-    console.log(`${chatName} -- ${subChatName}`)
   };
-  
 
   const closeModal = () => {
     setShowModal(false);
@@ -144,15 +166,14 @@ const Services: React.FC = () => {
 
   return (
     <IonPage className={style.page}>
-      <IonHeader onClick={() => closeUp()} style={{ boxShadow: 'none', paddingBlock: "8px" }}>
+      <IonHeader onClick={closeUp} style={{ boxShadow: 'none', paddingBlock: '8px' }}>
         <Back />
         <div className={style.searchField}>
           <IonIcon icon={search} />
-          <input type='text' placeholder='Search Services' className={style.input} />
+          <input type="text" placeholder="Search Services" className={style.input} />
         </div>
       </IonHeader>
-      <IonContent onClick={() => closeUp()}>
-        {/* Display the dynamic service name and subcategory name in the header */}
+      <IonContent onClick={closeUp}>
         <div className={style.headerInfo}>
           {serviceName && <h2>{serviceName}</h2>}
           {subcategoryName && <h3>{subcategoryName}</h3>}
@@ -160,7 +181,6 @@ const Services: React.FC = () => {
 
         <div className={style.categoryGrid}>
           {isLoading ? (
-            // Skeleton loader for each category item while loading
             Array.from({ length: 6 }).map((_, index) => (
               <div key={index} className={style.categoryItem}>
                 <IonSkeletonText animated style={{ width: '100%', height: '100%' }} />
@@ -182,19 +202,22 @@ const Services: React.FC = () => {
           )}
         </div>
 
-        {/* Modal to display subcategories */}
-        <IonModal className={style.partialModal} isOpen={showModal} onDidDismiss={() => setShowModal(false)}>
+        <IonModal className={style.partialModal} isOpen={showModal} onDidDismiss={closeModal}>
           <IonHeader className={style.modalHead}>
             <div className={style.searchField}>
               <IonIcon icon={search} />
-              <input type='text' placeholder='Search Services' className={style.input} />
+              <input type="text" placeholder="Search Services" className={style.input} />
             </div>
           </IonHeader>
           <IonContent className={style.modalContent}>
             <IonList className={style.subcategoryList}>
               {subcategories.length > 0 ? (
                 subcategories.map((subcategory) => (
-                  <IonItem key={subcategory.id} onClick={() => handleSubcategoryClick(subcategory)} className={style.subcategoryItem}>
+                  <IonItem
+                    key={subcategory.id}
+                    onClick={() => handleSubcategoryClick(subcategory)}
+                    className={style.subcategoryItem}
+                  >
                     {subcategory.subcategory_name}
                   </IonItem>
                 ))

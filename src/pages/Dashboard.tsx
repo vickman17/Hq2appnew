@@ -24,9 +24,8 @@ const Dashboard: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const user = sessionStorage.getItem("userInfo");
-    const parsedData = JSON.parse(user);
-    const firstName = parsedData.firstName;
-
+    const parsedData = user ? JSON.parse(user) : null;
+    const firstName = parsedData?.firstName || "Guest";
     const history = useHistory();
 
     const handleMenuOpen = () => {

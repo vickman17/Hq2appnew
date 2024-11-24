@@ -4,23 +4,23 @@ import menu from './Menu.module.css';
 import Theme from './Theme';
 import DarkMode from "./DarkMode";
 import Logout from "./Logout";
-import { useUser } from "../hooks/UserContext";  // Import useUser
-import {useHistory} from "react-router-dom";
+import { useUser } from "../hooks/UserContext"; // Import useUser
+import { useHistory } from "react-router-dom";
 
 interface MenuProps {
-    contentId: string;
-    onMenuOpen?: () => void;
-    onMenuClose?: () => void;
+  contentId: string;
+  onMenuOpen?: () => void;
+  onMenuClose?: () => void;
 }
 
 const Menu: React.FC<MenuProps> = ({ contentId, onMenuOpen, onMenuClose }) => {
-    const { userInfo } = useUser();  // Access userInfo from useUser
-    const user = sessionStorage.getItem("userInfo");
-    const parsedData = JSON.parse(user);
-    const firstName = parsedData.firstName;
-    const lastName = parsedData.lastName;
-    const history = useHistory();
-
+  const { userInfo } = useUser(); // Access userInfo from useUser
+  const user = sessionStorage.getItem("userInfo");
+  const parsedData = user ? JSON.parse(user) : null; // Handle null case for user
+  const firstName = parsedData?.firstName || "Guest"; // Fallback to "Guest" if undefined
+  const lastName = parsedData?.lastName || ""; // Fallback to an empty string if undefined
+  const history = useHistory();
+  
     return (
         <IonMenu contentId={contentId} onIonDidOpen={onMenuOpen} onIonDidClose={onMenuClose}>
             <IonHeader style={{ display: "flex", height: "20%", border: "0px solid black" }}>
