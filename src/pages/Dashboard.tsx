@@ -45,7 +45,7 @@ const Dashboard: React.FC = () => {
 
         setLoading(true);
         try {
-            const response = await fetch(`https://localhost/hq2endpooint/search.php?query=${query}`);
+            const response = await fetch(`http://localhost/hq2endpooint/search.php?query=${query}`);
             const data = await response.json();
 
             if (response.ok) {
