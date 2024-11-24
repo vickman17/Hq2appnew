@@ -155,7 +155,6 @@ const Chat: React.FC = () => {
                   paddingInline: "5px",
                   fontSize: "19px",
                   textAlign: "left",
-                  borderRadius: "7rem",
                   background: msg.sender_id === userId ? "#134d37" : "grey",
                   margin: msg.sender_id === userId ? "7px 0 0 auto" : "7px auto 0 0",
                 }}
