@@ -44,7 +44,7 @@ const EditProfile: React.FC = () => {
         formData.append("userId", userId);
 
         try {
-            const response = await fetch("http://myendpoint.atwebpages.com/uploadProfile.php", {
+            const response = await fetch("https://myendpoint.atwebpages.com/uploadProfile.php", {
                 method: "POST",
                 body: formData,
             });
@@ -81,7 +81,7 @@ const EditProfile: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://myendpoint.atwebpages.com/uploadImage.php", {
+      const response = await fetch("https://myendpoint.atwebpages.com/uploadImage.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

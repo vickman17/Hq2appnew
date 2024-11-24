@@ -29,7 +29,7 @@ const Login: React.FC = () => {
     document.body.style.overflowX = "hidden";
   }, []);
 
-  const endpoint = "http://myendpoint.atwebpages.com/login.php";
+  const endpoint = "https://myendpoint.atwebpages.com/login.php";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
