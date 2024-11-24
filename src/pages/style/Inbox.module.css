@@ -1,0 +1,10 @@
+.pageName{
+    font-size: 29px;
+    font-weight: 600;
+    padding-left: 1rem;
+}
+
+.box{
+    border: 0px solid black;
+    margin-top: 1rem;
+}

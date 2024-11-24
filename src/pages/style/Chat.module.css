@@ -1,0 +1,64 @@
+.head{
+    display: flex;
+    align-items: center;
+    padding: 6px;
+}
+
+.chatName{
+    font-size: 14px;
+    margin-left: auto;
+    padding-right: 19px;
+}
+
+.chatBox{
+    display: flex;
+    align-items: center;
+    height: min-content;
+    border-radius: 1rem;
+    background: var(--ion-chat-box);
+    border: 0px solid black;
+    
+}
+
+.send{
+    --background: transparent;
+    width: 65px;
+    --border: 0px solid black;
+    --box-shadow: none;
+    color: var(--ion-send);
+    padding: 0;
+    height: fit-content;
+    margin-top: auto;
+}
+
+.sendButton{
+    font-size: 95px;
+    height: 40px;
+    margin-top: auto;
+    border: 0px solid rgb(150, 118, 118);
+}
+
+.inputField{
+    background: transparent;
+    border: 0px solid  black;
+    padding-inline: 4px;
+    padding-block: 2px;
+    border: none;
+    width: 100%;
+    height:fit-content;
+    outline: none;
+    font-size: 25px;
+    resize: none; /* Prevent manual resizing */
+    overflow: hidden; /* Hide scrollbar */ /* Adjust font size */
+    line-height: 1.5; /* Adjust line height */
+    box-sizing: border-box;
+}
+
+.file{
+    width: 10%;
+    text-align: center;
+    font-size: 30px;
+    height: 4px;
+    margin-top: auto;
+    border: 0px solid black;
+}
