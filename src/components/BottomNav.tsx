@@ -13,16 +13,16 @@ const BottomNav: React.FC = () => {
     return(
         <IonFooter style={{'--background':"transparent"}}>
             <IonTabBar slot="bottom" style={{boxShadow:"1px 3px 19px grey", '--background':"transparent"}}>
-                <IonTabButton tab="home" onclick={()=>history.push('/dashboard')}>
+                <IonTabButton tab="home" onClick={()=>history.push('/dashboard')}>
                     <IonIcon className={edit.icon} icon={homeOutline}/>
                 </IonTabButton>
-                <IonTabButton tab="work" onclick={()=>history.push('/jobs')}>
+                <IonTabButton tab="work" onClick={()=>history.push('/jobs')}>
                     <IonIcon icon={constructOutline} className={edit.icon} />
                 </IonTabButton>
-                <IonTabButton tab="chat" onclick={()=>history.push('/inbox')}>
+                <IonTabButton tab="chat" onClick={()=>history.push('/inbox')}>
                     <IonIcon icon={chatboxEllipsesOutline} className={edit.icon} />
                 </IonTabButton>
-                <IonTabButton tab="wallet" onclick={()=>history.push('/wallet')}>
+                <IonTabButton tab="wallet" onClick={()=>history.push('/wallet')}>
                     <IonIcon icon={walletOutline} className={edit.icon}/>
                 </IonTabButton>
             </IonTabBar>

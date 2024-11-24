@@ -38,22 +38,22 @@ const Menu: React.FC<MenuProps> = ({ contentId, onMenuOpen, onMenuClose }) => {
             </IonHeader>
             <IonContent className={menu.menulist} style={{ height: "100vh", paddingTop: "2rem" }}>
                 <div style={{ borderBottom: "0px solid black", width: "95%", margin: "auto", paddingBottom: "0.5rem", paddingTop:"2rem" }}>
-                    <IonItem onclick={()=>history.push('/notification')} style={{ '--background': "transparent" }}>
+                    <IonItem onClick={()=>history.push('/notification')} style={{ '--background': "transparent" }}>
                         <h1>NOTIFICATION</h1>
                     </IonItem>
                 </div>
                 <div style={{ borderBottom: "0px solid black", width: "95%", margin: "auto", paddingTop: "2rem", paddingBottom: "0.5rem" }}>
-                    <IonItem onclick={()=>history.push('/services')} style={{ '--background': "transparent" }}>
+                    <IonItem onClick={()=>history.push('/services')} style={{ '--background': "transparent" }}>
                         <h1>SERVICES</h1>
                     </IonItem>
                 </div>
                 <div style={{ borderBottom: "0px solid black", width: "95%", margin: "auto", paddingTop: "2rem", paddingBottom: "0.5rem" }}>
-                    <IonItem onclick={()=>history.push('/inbox')} style={{ '--background': "transparent" }}>
+                    <IonItem onClick={()=>history.push('/inbox')} style={{ '--background': "transparent" }}>
                         <h1>INBOX</h1>
                     </IonItem>
                 </div>
                 <div style={{ borderBottom: "0px solid black", width: "95%", margin: "auto", paddingTop: "2rem", paddingBottom: "0.5rem" }}>
-                    <IonItem onclick={()=>history.push('/settings')} style={{ '--background': "transparent" }}>
+                    <IonItem onClick={()=>history.push('/settings')} style={{ '--background': "transparent" }}>
                         <h1>SETTINGS</h1>
                     </IonItem>
                 </div>
