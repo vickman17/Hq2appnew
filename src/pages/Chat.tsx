@@ -55,7 +55,7 @@ const Chat: React.FC = () => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `https://globalbills.com.ng/api/fetchMessage.php?user_id=${userId}&chat_with_id=${chatWithID}`
+          `http://myendpoint.atwebpages.com/fetchMessage.php?user_id=${userId}&chat_with_id=${chatWithID}`
         );
         const data = await response.json();
         setMessages(data);
@@ -109,7 +109,7 @@ const Chat: React.FC = () => {
     }
 
     try {
-      const response = await fetch('https://globalbills.com.ng/api/sendMessage.php', {
+      const response = await fetch('http://myendpoint.atwebpages.com/sendMessage.php', {
         method: 'POST',
         body: formData,
       });

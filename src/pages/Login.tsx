@@ -29,13 +29,15 @@ const Login: React.FC = () => {
     document.body.style.overflowX = "hidden";
   }, []);
 
+  const endpoint = "http://myendpoint.atwebpages.com/login.php";
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
 
     e.preventDefault();
 
     try {
-        const response = await fetch('https://globalbills.com.ng/api/login.php', {
+        const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

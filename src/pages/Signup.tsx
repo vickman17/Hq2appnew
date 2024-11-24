@@ -50,7 +50,7 @@ const Signup: React.FC = () => {
     setIsSubmitting(true); // Disable button when form is being submitted
 
     try {
-      const response = await fetch("https://globalbills.com.ng/api/register.php", {
+      const response = await fetch("http://myendpoint.atwebpages.com/register.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

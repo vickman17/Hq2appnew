@@ -31,7 +31,7 @@ const Inbox: React.FC = () => {
   useEffect(() => {
     if (userId) {
       // Fetch chats with last message for the user
-      fetch(`https://globalbills.com.ng/api/inbox.php?userId=${userId}`, {
+      fetch(`http://myendpoint.atwebpages.com/inbox.php?userId=${userId}`, {
         method: 'GET',
       })
         .then((response) => {

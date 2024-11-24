@@ -11,7 +11,7 @@ const MainPic: React.FC = () => {
     // Fetch profile image on component mount
     const fetchProfileImage = async () => {
       try {
-        const response = await fetch(`https://globalbills.com.ng/api/getProfile.php?userId=${userId}`);
+        const response = await fetch(`http://myendpoint.atwebpages.com/getProfile.php?userId=${userId}`);
         const data = await response.json();
 
         if (data.status === "success" && data.profile_picture) {
@@ -35,7 +35,7 @@ const MainPic: React.FC = () => {
       {/* Use a fallback image if profileImage is undefined */}
       <img
         className={style.img}
-        src={profileImage || "https://via.placeholder.com/150"} // Fallback placeholder image
+        src={profileImage || "http://via.placeholder.com/150"} // Fallback placeholder image
         alt="Profile"
       />
     </div>

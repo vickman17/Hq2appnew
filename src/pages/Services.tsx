@@ -37,7 +37,7 @@ interface RouteParams {
 }
 
 const fetchCategories = async (): Promise<Category[]> => {
-  const url = 'https://globalbills.com.ng/api/fetchCategory.php';
+  const url = 'http://myendpoint.atwebpages.com/fetchCategory.php';
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Network response was not ok');
@@ -92,7 +92,7 @@ const Services: React.FC = () => {
     setShowModal(true);
 
     try {
-      const response = await fetch(`https://globalbills.com.ng/api/fetchSub.php?categoryId=${category.id}`);
+      const response = await fetch(`http://myendpoint.atwebpages.com/fetchSub.php?categoryId=${category.id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch subcategories');
       }
@@ -130,7 +130,7 @@ const Services: React.FC = () => {
     const subChatName = subcategoryName;
 
     try {
-      const response = await fetch('https://globalbills.com.ng/api/saveChat.php', {
+      const response = await fetch('http://myendpoint.atwebpages.com/saveChat.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -192,7 +192,7 @@ const Services: React.FC = () => {
                 key={category.id}
                 className={style.categoryItem}
                 style={{
-                  backgroundImage: `url(https://globalbills.com.ng/api/${category.category_pics})`,
+                  backgroundImage: `url(https://myendpoint.atwebpages.com/${category.category_pics})`,
                 }}
                 onClick={() => handleCategoryClick(category)}
               >
