@@ -29,7 +29,7 @@ const Login: React.FC = () => {
     document.body.style.overflowX = "hidden";
   }, []);
 
-  const endpoint = "https://myendpoint.lovestoblog.com/hq2endpoint/login.php";
+  const endpoint = "https://www.globalbills.com.ng/api/login.php";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
@@ -40,9 +40,10 @@ const Login: React.FC = () => {
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-            },
+              'Content-Type': 'application/json',
+          },
             body: JSON.stringify({ email, password }),
+            credentials: "include"
         });
 
         if (!response.ok) {

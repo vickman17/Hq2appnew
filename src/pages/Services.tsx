@@ -37,7 +37,7 @@ interface RouteParams {
 }
 
 const fetchCategories = async (): Promise<Category[]> => {
-  const url = 'https://myendpoint.lovestoblog.com/hq2endpoint/fetchCategory.php';
+  const url = 'https://www.globalbills.com.ng/api/fetchCategory.php';
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Network response was not ok');
@@ -92,7 +92,7 @@ const Services: React.FC = () => {
     setShowModal(true);
 
     try {
-      const response = await fetch(`https://myendpoint.lovestoblog.com/hq2endpoint/fetchSub.php?categoryId=${category.id}`);
+      const response = await fetch(`https://www.globalbills.com.ng/api/fetchSub.php?categoryId=${category.id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch subcategories');
       }
@@ -130,7 +130,7 @@ const Services: React.FC = () => {
     const subChatName = subcategoryName;
 
     try {
-      const response = await fetch('https://myendpoint.lovestoblog.com/hq2endpoint/saveChat.php', {
+      const response = await fetch('https://www.globalbills.com.ng/api/saveChat.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -192,7 +192,7 @@ const Services: React.FC = () => {
                 key={category.id}
                 className={style.categoryItem}
                 style={{
-                  backgroundImage: `url(https://myendpoint.lovestoblog.com/hq2endpoint/${category.category_pics})`,
+                  backgroundImage: `url(https://www.globalbills.com.ng/api/${category.category_pics})`,
                 }}
                 onClick={() => handleCategoryClick(category)}
               >

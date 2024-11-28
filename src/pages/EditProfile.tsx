@@ -44,7 +44,7 @@ const EditProfile: React.FC = () => {
         formData.append("userId", userId);
 
         try {
-            const response = await fetch("https://myendpoint.lovestoblog.com/hq2endpoint/uploadProfile.php", {
+            const response = await fetch("https://www.globalbills.com.ng/api/uploadProfile.php", {
                 method: "POST",
                 body: formData,
             });
@@ -81,7 +81,7 @@ const EditProfile: React.FC = () => {
     };
 
     try {
-      const response = await fetch("https://myendpoint.lovestoblog.com/hq2endpoint/uploadImage.php", {
+      const response = await fetch("https://www.globalbills.com.ng/api/uploadImage.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

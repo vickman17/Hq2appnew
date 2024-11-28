@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
     }
 
     // Search handler to fetch job categories and subcategories
-    const handleSearch = async (query: string) => {
+ /*   const handleSearch = async (query: string) => {
         if (query.trim() === "") {
             setSearchResults([]);
             return;
@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
         } else {
             setSearchResults([]); // Reset search results if query is empty or too short
         }
-    }, [searchQuery]);
+    }, [searchQuery]);*/
 
     const electrical = './Electricianbg.png';
     const baker = './Bakerbg.png';
@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
                                 value={searchQuery}
                                 placeholder="I am looking for..."
                                 className={styles.search}
-                                onIonInput={(e) => setSearchQuery(e.detail.value!)}
+                             //  {/* onIonInput={(e) => setSearchQuery(e.detail.value!)} */}//
                             />
                         </div>
                     </div>

@@ -10,7 +10,7 @@ const UserList: React.FC = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("https://myendpoint.lovestoblog.com/hq2endpoint/fetchUser.php");
+        const response = await fetch("https://www.globalbills.com.ng/api/fetchUser.php");
         const data = await response.json();
 
         if (Array.isArray(data)) {
