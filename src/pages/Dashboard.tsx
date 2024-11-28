@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
                                 value={searchQuery}
                                 placeholder="I am looking for..."
                                 className={styles.search}
-                             //  {/* onIonInput={(e) => setSearchQuery(e.detail.value!)} */}//
+                             //  {/* onIonInput={(e) => setSearchQuery(e.detail.value!)} */}
                             />
                         </div>
                     </div>
