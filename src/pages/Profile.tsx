@@ -8,7 +8,7 @@ import MainPic from "../components/MainPic";
 import {useHistory} from "react-router-dom";
 
 const Profile: React.FC=()=>{
- const userInfo =localStorage.getItem("userInfo");
+ const userInfo = sessionStorage.getItem("userInfo");
  const Data = JSON.parse(userInfo);
  const firstName = Data.firstName;
  const lastName = Data.lastName;
