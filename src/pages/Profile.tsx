@@ -8,6 +8,11 @@ import MainPic from "../components/MainPic";
 import {useHistory} from "react-router-dom";
 
 const Profile: React.FC=()=>{
+ const userInfo =localStorage.getItem("userInfo");
+ const Data = JSON.parse(userInfo);
+ const firstName = Data.firstName;
+ const lastName = Data.lastName;
+
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
@@ -27,7 +32,9 @@ const Profile: React.FC=()=>{
                 </div>
                 <div className={style.info}>
                     <div className={style.tag}>
-                        <div className={style.name}>Victory Madumere</div>
+                        <div className={style.name}>
+                 {`${firstName} {lastName}`}
+              </div>
                         <div className={style.role}>Client</div>
                     </div>
                     <div className={style.details} onClick={()=>history.push('/editprofile')}>
