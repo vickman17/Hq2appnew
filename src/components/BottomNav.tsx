@@ -3,7 +3,6 @@ import { IonFooter, IonTabBar, IonTabButton, IonSkeletonText, IonIcon } from '@i
 import { useHistory } from 'react-router-dom';
 import { homeOutline, hammerOutline, chatbubbleEllipsesOutline, chatboxEllipsesOutline, cashOutline } from 'ionicons/icons';
 import edit from './bottomNav.module.css';
-import '@lordicon/react';
 import style from "./bottomNav.module.css";
 
 
@@ -15,12 +14,7 @@ const BottomNav: React.FC = () => {
 
 
   // Handles loading completion for each Lottie animation
-  const handleAnimationLoaded = (index: number) => {
-    setLoading((prev) => {
-      const updated = [...prev];
-      updated[index] = false;
-      return updated;
-    });
+
   };
 
   return (
