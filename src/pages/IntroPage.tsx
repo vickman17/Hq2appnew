@@ -4,7 +4,8 @@ import Slider from 'react-slick'; // Import react-slick for the slider
 import { IonPage, IonContent, IonText, IonIcon } from '@ionic/react'; // Only Ionic components needed
 import style from "./style/IntroPage.module.css";
 import { chevronForwardCircleOutline } from 'ionicons/icons';
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const IntroPage: React.FC= () => {
   const [currentSlide, setCurrentSlide] = useState(0);
