@@ -15,7 +15,6 @@ const BottomNav: React.FC = () => {
 
   // Handles loading completion for each Lottie animation
 
-  };
 
   return (
     <IonFooter style={{ '--background': 'transparent' }}>
@@ -58,6 +57,6 @@ const BottomNav: React.FC = () => {
       </IonTabBar>
     </IonFooter>
   );
-};
+}
 
 export default BottomNav;
