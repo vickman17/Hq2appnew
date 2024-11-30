@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IonPage, IonToast } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
+import ProgressBar from '../components/ProgressBar';
 import styles from "./style/Login.module.css";
 import { useUser} from '../hooks/UserContext'; // Import the hook
 
@@ -78,14 +79,14 @@ const Login: React.FC = () => {
 };
 
 
-  const logo = '../favicon.png';
+  const logo = '/assets/icon.png';
 
   return (
     <IonPage className={styles.page}>
       <div>
         <div style={{ textAlign: "center", marginTop: "5rem" }}>
           <img src={logo} style={{ width: "20%", padding: "12px" }} alt="Logo" />
-          <div>ooooooooooo</div>
+          
         </div>
         <form className={styles.form} onSubmit={handleLogin}>
           <h1 style={{ fontWeight: "100", fontSize: '25px', marginBottom: '-10px' }}>SIGN IN</h1>
@@ -95,7 +96,7 @@ const Login: React.FC = () => {
           </div>
           <div>
             <input
-              type="text"
+              type="email"
               className={styles.inputs}
              name="email"
               value={email}
@@ -131,7 +132,7 @@ const Login: React.FC = () => {
           </div>
           <div>
             <button style={{ padding: "12px", width: '85%', borderRadius: "6px", fontSize: "16px", backgroundColor: "bab6b5", border: 'none', alignItems:"center", display:"flex", textAlign:"center", justifyContent:"center", margin: "auto" }}>
-            <img src="/google.png" style={{width: "10%",}} alt="google icon" />
+            <img src="/assets/google.png" style={{width: "10%",}} alt="google icon" />
               Google</button>
             <div style={{marginTop:"5px"}}>Don't have an account? <span style={{color:"#19fb04"}} onClick={()=>history.push('/signup')}>Sign up</span></div>
             <IonToast isOpen={toast} onDidDismiss={() => setToast(false)} message={text} duration={6000} position="top" color={statusColor} />

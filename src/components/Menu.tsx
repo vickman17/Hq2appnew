@@ -20,12 +20,14 @@ const Menu: React.FC<MenuProps> = ({ contentId, onMenuOpen, onMenuClose }) => {
   const firstName = parsedData?.firstName || "Guest"; // Fallback to "Guest" if undefined
   const lastName = parsedData?.lastName || ""; // Fallback to an empty string if undefined
   const history = useHistory();
-  
+  const fallback = '/assets/blueplace.jpg';
+
+
     return (
         <IonMenu contentId={contentId} onIonDidOpen={onMenuOpen} onIonDidClose={onMenuClose}>
             <IonHeader style={{ display: "flex", height: "20%", border: "0px solid black" }}>
                 <div className={menu.menuImg} style={{ height: "100%", width: "40%" }}>
-                    <img  style={{ width: "100%", height: "100%" }}  />
+                    <img src={fallback} style={{ width: "100%", height: "100%" }}  />
                 </div>
                 <div style={{ padding: "5px", width: "60%" }} className={menu.menuheader}>
                     <div style={{ border: "0px solid black", width: "fit-content", marginLeft: "auto" }}>
@@ -53,7 +55,7 @@ const Menu: React.FC<MenuProps> = ({ contentId, onMenuOpen, onMenuClose }) => {
                     </IonItem>
                 </div>
                 <div style={{ borderBottom: "0px solid black", width: "95%", margin: "auto", paddingTop: "2rem", paddingBottom: "0.5rem" }}>
-                    <IonItem onClick={()=>history.push('/settings')} style={{ '--background': "transparent" }}>
+                    <IonItem onClick={()=>history.push('/profile')} style={{ '--background': "transparent" }}>
                         <h1>SETTINGS</h1>
                     </IonItem>
                 </div>

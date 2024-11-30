@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel, setupIonicReact } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs, IonIcon, IonLabel, setupIonicReact, getPlatforms, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Login from './pages/Login';
 import Signup from './pages/Signup'
@@ -32,44 +32,72 @@ import { Storage } from '@ionic/storage';
 import ProtectedRoute from './hooks/ProtectedRouteProps';
 import Transition from './components/Transition';
 import Chat from './pages/Chat';
+import SplashScreen from './components/SplashScreen';
+import IntroPage from './pages/IntroPage';
+
+setupIonicReact()
 
 
 
-
-setupIonicReact();
 
 const queryClient = new QueryClient();
 
 const App: React.FC = () => {
   const [storage, setStorage] = useState<Storage | null>(null); // useState is now correctly imported
-
-  // Initialize Ionic Storage
+  const [showIntro, setShowIntro] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [getIntro, setGetIntro] = useState<React.FC>(() => IntroPage);
+  const seenIntro = localStorage.getItem("introSeen");
   useEffect(() => {
-    const initStorage = async () => {
-      const newStorage = new Storage(); // No arguments needed in the constructor
-      const createdStorage = await newStorage.create(); // Await the storage creation
-      setStorage(createdStorage); // Set storage once it's initialized
-    };
-
-    initStorage(); // Call the initStorage function
+    document.body.style.fontFamily = "Varela Round, sans-serif";
+    document.body.style.overflowX = "hidden";
   }, []);
-  useEffect(()=>{
-    document.body.style.fontFamily = "Varela Round";
-  },[])
 
-  if (!storage) {
-    return <div><Loading/></div>; // You can show a loading screen while storage is being initialized
+  useEffect(() => {
+    // Check if the platform is iOS
+    if (isPlatform('ios')) {
+      document.body.classList.add('ios');
+    } else {
+      document.body.classList.add('ios'); // Apply iOS styles even if not iOS
+    }
+  }, []);
+  useEffect(() => {
+    if(seenIntro){
+      setGetIntro(()=>Login)
+    }  
+  }, []);
+
+
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    // Set a timeout to hide the splash screen after 3 seconds
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 6000);
+
+    return () => clearTimeout(timer); // Cleanup timeout
+  }, []);
+
+  if (showSplash) {
+    return (
+      <SplashScreen/>
+    );
   }
+
   return(
     <IonApp>
       <QueryClientProvider client={queryClient}>
         <UserProvider>
           <IonReactRouter>     
               <IonRouterOutlet>
-                <Route exact path="/" component={Login} />
+                
+                <Route exact path="/" component={getIntro} />
                 <Route path='/login' component={Login} />
                 <Route path='/verify' component={Verify} />
                 <Route path='/Signup' component={Signup} />
+                <Route path='/intro' component={IntroPage}/>
+                <Route path="/splash" component={SplashScreen}/>
                 <ProtectedRoute path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path='/notification' component={Notification}/>
                 <ProtectedRoute path="/profile" component={Profile} />

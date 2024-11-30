@@ -6,7 +6,7 @@ const CompletedJobs: React.FC = () =>{
 
     return(
         <div>
-            <h1>You have got no completed jobs</h1>
+            You currently have no completed jobs
         </div>
     )
 }

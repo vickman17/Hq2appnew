@@ -62,6 +62,7 @@ const Services: React.FC = () => {
   const parsedData = userDetails ? JSON.parse(userDetails) : null;
   const [serviceName, setServiceName] = useState<string | null>(null);
   const [subcategoryName, setSubcategoryName] = useState<string | null>(null);
+  const [loader, setLoader] = useState<boolean>(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -89,6 +90,7 @@ const Services: React.FC = () => {
 
   const handleCategoryClick = async (category: Category) => {
     setSelectedCategory(category);
+    setLoader(true);
     setShowModal(true);
 
     try {
@@ -98,12 +100,16 @@ const Services: React.FC = () => {
       }
       const subcategoriesData = await response.json();
       setSubcategories(subcategoriesData);
+      setLoader(false);
     } catch (error) {
       console.error('Error fetching subcategories:', error);
+      setLoader(true)
     }
   };
 
   const handleSubcategoryClick = (subcategory: Subcategory) => {
+
+
     if (selectedCategory) {
       openChatWithSupervisor(
         selectedCategory.supervisor_id,
@@ -211,19 +217,19 @@ const Services: React.FC = () => {
           </IonHeader>
           <IonContent className={style.modalContent}>
             <IonList className={style.subcategoryList}>
-              {subcategories.length > 0 ? (
-                subcategories.map((subcategory) => (
+                {loader  ?  Array.from({ length: 19 }).map((_, index) => (
+                                <div key={index} className={style.skeleton}>
+                                  <IonSkeletonText animated style={{ width: '100%', height: '25px', color:"red" }} />
+                                </div>
+                              )) : (
+                  subcategories.map((subcategory) => (
                   <IonItem
                     key={subcategory.id}
                     onClick={() => handleSubcategoryClick(subcategory)}
                     className={style.subcategoryItem}
                   >
                     {subcategory.subcategory_name}
-                  </IonItem>
-                ))
-              ) : (
-                <p>No subcategories found.</p>
-              )}
+                  </IonItem>)))}
             </IonList>
           </IonContent>
         </IonModal>

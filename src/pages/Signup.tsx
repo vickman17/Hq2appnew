@@ -88,7 +88,7 @@ const Signup: React.FC = () => {
     document.body.style.overflowY = "auto";
   }, []);
 
-  const logo = "/favicon.png";
+  const logo = "/assets/icon.png";
 
   return (
     <IonPage style={{ textAlign: "center" }}>
@@ -204,7 +204,7 @@ const Signup: React.FC = () => {
               }}
             >
               <IonToast isOpen={toast} onDidDismiss={() => setToast(false)} message={text} duration={6000} position="top" color={statusColor} />
-              <img src="/google.png" style={{width: "10%",}} alt="google icon" />
+              <img src="/assets/google.png" style={{width: "10%",}} alt="google icon" />
               Google
             </button>
             

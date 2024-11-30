@@ -4,7 +4,7 @@ const PendingJobs: React.FC =()=>{
 
     return(
         <div>
-            Pending Jobs
+            You currently have no pending jobs
         </div>
     )
 }

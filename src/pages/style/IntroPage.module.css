@@ -1,0 +1,71 @@
+/* Styles for the intro page */
+.sliderContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+  }
+  
+  .slideContent {
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .slideImage{
+    border: 0px solid black;
+    height: 500px;
+    width: 500px;
+  }
+
+  .imgCont{
+    border: 0px solid black;
+    height: 43vh;
+    width: 100%;
+  }
+
+
+  .p {
+    font-size: 18px;
+  }
+
+  .skip{
+    margin-top: 6rem;
+    margin-left: auto;
+    margin-right: 1rem;
+    border-radius: 12px;
+    border: 0px solid black;
+    padding: 12px;
+    text-align: right;
+    width: fit-content;
+    font-size: 22px;
+    color: white;
+    font-weight: 500;
+    background: #19fb04;
+    display: flex;
+    align-items: center;
+  }
+
+  .write{
+    text-align: center;
+    border-radius: 2rem;
+    padding-block: 1rem;
+    padding: 1rem;
+    border-top: 1px solid grey;
+    margin-top: 4rem; 
+  }
+
+  .slickDots {
+    bottom: 20px;
+  }
+  
+  .slickDots li button:before {
+    font-size: 12px;
+    color: #000;
+  }
+  

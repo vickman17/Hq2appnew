@@ -16,8 +16,9 @@
     height: min-content;
     border-radius: 1rem;
     background: var(--ion-chat-box);
-    border: 0px solid black;
-    
+    border: 1px solid black;
+    padding-inline: 4px;
+    padding-top: 4px;
 }
 
 .send{
@@ -28,21 +29,21 @@
     color: var(--ion-send);
     padding: 0;
     height: fit-content;
-    margin-top: auto;
 }
 
 .sendButton{
-    font-size: 95px;
-    height: 40px;
+    padding-inline: 4px;
+    padding-bottom: 13px;    
+    width: 65px;
     margin-top: auto;
+    font-size: 35px;
+    height: 20px;
     border: 0px solid rgb(150, 118, 118);
 }
 
 .inputField{
     background: transparent;
     border: 0px solid  black;
-    padding-inline: 4px;
-    padding-block: 2px;
     border: none;
     width: 100%;
     height:fit-content;
@@ -50,7 +51,7 @@
     font-size: 25px;
     resize: none; /* Prevent manual resizing */
     overflow: hidden; /* Hide scrollbar */ /* Adjust font size */
-    line-height: 1.5; /* Adjust line height */
+    line-height: 1; /* Adjust line height */
     box-sizing: border-box;
 }
 

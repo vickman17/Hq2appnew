@@ -6,7 +6,7 @@ const ProfilePics: React.FC = () => {
     const userInfo = sessionStorage.getItem("userInfo");
     const parse = JSON.parse(userInfo || '{}');
     const userId = parse.id;
-
+  const fallback = '/assets/blueplace.jpg';
     const [profileImage, setProfileImage] = useState<string | null>(null);
     const [mimeType, setMimeType] = useState<string | null>(null);
 
@@ -37,9 +37,9 @@ const ProfilePics: React.FC = () => {
     return (
         <div className={pro.profile}>
             {profileImage && mimeType ? (
-              <IonImg src={`data:${mimeType};base64,${profileImage}`} />
+              <img src={`data:${mimeType};base64,${profileImage}`} />
             ) : (
-                    ""
+              <img src={fallback} />
             )}
         </div>
     );

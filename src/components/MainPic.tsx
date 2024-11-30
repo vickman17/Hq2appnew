@@ -6,6 +6,7 @@ const MainPic: React.FC = () => {
   const parse = userInfo ? JSON.parse(userInfo) : null; // Handle potential null value
   const userId = parse?.id || ""; // Fallback to an empty string if parse or parse.id is null
   const [profileImage, setProfileImage] = useState<string | undefined>(undefined); // Allow undefined
+  const fallback = "/assets/blueplace.jpg";
 
   useEffect(() => {
     // Fetch profile image on component mount
@@ -33,11 +34,13 @@ const MainPic: React.FC = () => {
   return (
     <div className={style.profile}>
       {/* Use a fallback image if profileImage is undefined */}
-      <img
+      {profileImage ? (<img
         className={style.img}
         src={profileImage || "https://via.placeholder.com/150"} // Fallback placeholder image
         alt="Profile"
-      />
+      />):(
+        <img className={style.img} src={fallback} />
+      )}
     </div>
   );
 };

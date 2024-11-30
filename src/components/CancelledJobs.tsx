@@ -7,7 +7,7 @@ const CancelledJobs: React.FC = () => {
 
     return(
             <div>
-                <h1>This is are cancelled jobs</h1>
+                You currently have no cancelled jobs
             </div>
     )
 }

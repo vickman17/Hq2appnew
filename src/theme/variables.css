@@ -1,3 +1,9 @@
+@import "node_modules/slick-carousel/slick/slick.css";
+@import "node_modules/slick-carousel/slick/slick-theme.css";
+
+
+
+
 :root{
     --ion-background-color: #ffffff;
     --ion-text-color: #000000;

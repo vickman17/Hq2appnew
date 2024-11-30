@@ -1,20 +1,19 @@
-.page{
+.page {
     font-family: "Varela Round";
     padding: 0;
     background: var(--body_background);
     color: var(--ion-text-color);
-}    
+}
 
-.book{
+.book {
     padding: 6px;
     border-radius: 8px;
-    background: transparent; 
+    background: transparent;
     border: 1px solid grey;
     color: white;
 }
 
-
-.inputContainer{
+.inputContainer {
     border: 1px solid var(--ion-border-line);
     width: 90%;
     margin: auto;
@@ -24,11 +23,11 @@
     padding-inline: 5px;
 }
 
-.search{
+.search {
     width: 92%;
-    height: 35px;
+    height: 10px;
     border-radius: 5px;
-    padding: 5px; 
+    padding: 5px;
     background: transparent;
     border: none;
     outline: none;
@@ -37,59 +36,49 @@
     font-size: 19px;
 }
 
-.what{
+.what {
     border: 0px solid black;
     padding-block: 1em;
     font-weight: 800;
     font-size: large;
 }
 
-
-.page p{
+.page p {
     color: var(--ion-text-color);
 }
 
-
-.menu{
+.menu {
     color: var(--ion-text-color);
 }
 
-
-.lab{
+.lab {
     font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 0px solid black;
     width: 90%;
     color: var(--ion-text);
     margin: auto;
-    border: 0px solid black;
     margin-top: 0.5rem;
 }
 
-.lab p{
+.lab p {
     font-size: 18px;
 }
 
-
-
-
-
-.horizontalScroll{
+.horizontalScroll {
     --overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    border: 0px solid black;
     margin-top: 1rem;
     height: 22%;
 }
 
-.horizontalScroll::-webkit-scrollbar{
+.horizontalScroll::-webkit-scrollbar {
     display: none;
 }
 
-.scrollContainer{
+.scrollContainer {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -97,40 +86,34 @@
     -ms-overflow-style: none;
     padding-left: 3rem;
     color: white;
-    border: 0px solid black;
 }
 
-@media (max-height:790px){
-    .scrollContainer{
+@media (max-height: 790px) {
+    .scrollContainer {
         padding-left: 10px;
-        border: 0px solid black;
     }
 
-    .horizontalScroll{
+    .horizontalScroll {
         padding-bottom: 10rem;
-        border: 0px solid black;
     }
 }
 
-.scrollContainer::-webkit-scrollbar{
+.scrollContainer::-webkit-scrollbar {
     display: none;
 }
 
-.category{
+.category {
     display: flex;
     justify-content: space-evenly;
 }
 
-@media (max-height: 790px){
-    .category{
-        display: flex;
+@media (max-height: 790px) {
+    .category {
         margin-bottom: 10px;
-        justify-content: space-evenly;
-    }   
+    }
 }
 
-.category p{
-    border: 0px solid black;
+.category p {
     background: var(--ion-primary);
     color: var(--ion-text-color);
     width: fit-content;
@@ -138,46 +121,63 @@
     border-radius: 10px;
 }
 
-
-
-.horizontalScroll2{
+.horizontalScroll2 {
     --overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    border: 0px solid black;
     height: 30%;
 }
 
-.horizontalScroll2::-webkit-scrollbar{
+.horizontalScroll2::-webkit-scrollbar {
     display: none;
 }
 
-
-
-.scrollContainer2{
+.scrollContainer2 {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-left: 1.5rem;
-    border: 0px solid black;
 }
 
-@media (max-height:670px){
-    .scrollContainer2{
+@media (max-height: 670px) {
+    .scrollContainer2 {
         padding-left: 10px;
         margin-top: 0.1rem;
-        border: 0px solid black;
     }
 
-    .horizontalScroll2{
+    .horizontalScroll2 {
         padding-bottom: 10rem;
-        border: 0px solid black;
     }
 }
 
-
-.scrollContainer2::-webkit-scrollbar{
+.scrollContainer2::-webkit-scrollbar {
     display: none;
 }
+
+.map{
+    border: 1px solid black;
+    background-image: url('/assets/map.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 15px;
+    height: 150px;
+}
+
+.glass {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Transparent white */
+    border-radius: 15px; /* Smooth corners */
+    backdrop-filter: blur(4px); /* Glass effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Border with transparency */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Text color for visibility */
+  }

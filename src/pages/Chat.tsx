@@ -9,19 +9,17 @@ import {
   IonHeader,
 } from '@ionic/react';
 import style from "./style/Chat.module.css";
-import { sendOutline, addCircleOutline } from "ionicons/icons";
+import { addCircleOutline, sendOutline } from "ionicons/icons";
 import Back from "../components/Back";
 import { useParams, useLocation } from "react-router-dom";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState<string>('');
-  const [file, setFile] = useState<File | null>(null);
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [typingUser, setTypingUser] = useState<string | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
   const { chatWithID } = useParams<{ chatWithID: string }>();
   const location = useLocation();
   const locationState = location.state as {
@@ -35,7 +33,7 @@ const Chat: React.FC = () => {
   const subChatName = locationState?.subChatName || '';
   const senderName = locationState?.senderName || '';
   const senderId = locationState?.senderId || '';
-
+  const [sent, setSent] = useState("");
   const userDetails = sessionStorage.getItem("userInfo");
   const parsedData = userDetails ? JSON.parse(userDetails) : {};
   const userId = parsedData?.id || '';
@@ -94,45 +92,43 @@ const Chat: React.FC = () => {
   };
 
   const sendMessage = async () => {
-    if (!newMessage.trim() && !file) return;
+    if (!newMessage.trim()) return;
+    setSent("Sending...");
+    setNewMessage('');
 
-    const formData = new FormData();
-    formData.append('sender_id', userId);
-    formData.append('senderName', userName);
-    formData.append('chatWithID', chatWithID);
-    formData.append('message', newMessage);
-    formData.append('chatName', chatName);
-    formData.append('subChatName', subChatName);
-
-    if (file) {
-      formData.append('file', file);
-    }
+    const messageData = {
+      sender_id: userId,
+      senderName: userName,
+      chatWithID: chatWithID,
+      message: newMessage,
+      chatName: chatName,
+      subChatName: subChatName,
+    };
 
     try {
       const response = await fetch('https://www.globalbills.com.ng/api/sendMessage.php', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(messageData),
       });
 
       const data = await response.json();
       if (data.status === 'success') {
-        setMessages((prev) => [
-          ...prev,
-          { sender_id: userId, recipient_id: chatWithID, message: newMessage, file: data.filePath },
-        ]);
+        setMessages((prev) => [...prev, messageData]);
+        setSent("Sent");
         setNewMessage('');
-        setFile(null);
       } else {
         console.error('Failed to send message:', data.message);
       }
     } catch (error) {
+      setNewMessage('');
+      setSent('An error occurred while sending.')
       console.error("Error sending message:", error);
+    }finally{
+      setSent("");
     }
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0] || null;
-    setFile(selectedFile);
   };
 
   return (
@@ -142,6 +138,7 @@ const Chat: React.FC = () => {
         <div className={style.chatName}>
           {subChatName} - {senderId === userId ? chatName : senderName}
         </div>
+        <p>{sent}</p>
       </IonHeader>
       <IonContent style={{ border: "0px solid yellow", height: "50vh", overflowY: "auto" }}>
         <IonList style={{ border: "0px solid blue" }} lines="none">
@@ -169,7 +166,6 @@ const Chat: React.FC = () => {
                   {msg.timestamp}
                 </p>
               </div>
-              {msg.file && <a href={msg.file} download>Download File</a>}
             </IonItem>
           ))}
           <div ref={messagesEndRef}></div>
@@ -192,19 +188,19 @@ const Chat: React.FC = () => {
             marginLeft: '16px',
             boxSizing: 'border-box',
             outline: 'none',
+            border: "none",
             minHeight: '5px',
             maxHeight: '400px',
             background: 'transparent',
           }}
         ></textarea>
-        {(newMessage.trim().length > 0 || file) ? (
-          <IonButton className={style.send} expand="block" onClick={sendMessage}>
-            <IonIcon className={style.sendButton} icon={sendOutline} />
-          </IonButton>
+        {newMessage.trim().length > 0 ? (
+          
+            <IonIcon onClick={sendMessage} className={style.sendButton} icon={sendOutline} />
+          
         ) : (
-          <IonButton className={style.send} expand="block">
+          
             <IonIcon className={style.sendButton} icon={addCircleOutline} />
-          </IonButton>
         )}
       </div>
     </IonPage>

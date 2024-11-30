@@ -22,11 +22,16 @@ const Dashboard: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResults, setSearchResults] = useState<any[]>([]); // State to hold search results
     const [loading, setLoading] = useState<boolean>(false);
-
+    const camera = "/assets/camera.png";
+    const hospitality = "/assets/cook.png"
     const user = sessionStorage.getItem("userInfo");
     const parsedData = user ? JSON.parse(user) : null;
     const firstName = parsedData?.firstName || "Guest";
     const history = useHistory();
+
+    const gotoservice = () =>{
+        history.push("/services")
+    }
 
     const handleMenuOpen = () => {
         setMenuIsOpen(true);
@@ -70,10 +75,10 @@ const Dashboard: React.FC = () => {
         }
     }, [searchQuery]);*/
 
-    const electrical = './Electricianbg.png';
-    const baker = './Bakerbg.png';
-    const eng = './Engbg.png';
-    const painter = './Painter2bg.png';
+    const electrical = '/assets/Electricianbg.png';
+    const baker = '/assets/Bakerbg.png';
+    const eng = '/assets/Engbg.png';
+    const painter = '/assets/Painter2bg.png';
 
   
 
@@ -135,7 +140,7 @@ const Dashboard: React.FC = () => {
                                 <div style={{ width: "50%", border: "0px solid white", color:"white", paddingBottom: "13px"}}>
                                     <h4 style={{ marginLeft: "-20px" }}>25% OFF</h4>
                                     <p style={{color:"white"}}>On first painting order</p>
-                                    <button className={styles.book}>Book now</button>
+                                    <button onClick={gotoservice} className={styles.book}>Book now</button>
                                 </div>
                                 <div style={{ width: "70%", marginTop: "auto" }}>
                                     <img src={painter} alt="Painter" />
@@ -145,7 +150,7 @@ const Dashboard: React.FC = () => {
                                 <div style={{ width: "50%", border: "0px solid white", paddingBottom: "13px" }}>
                                     <h4 style={{ marginLeft: "-20px" }}>15% OFF</h4>
                                     <p style={{color:"white"}}>On first electrical order</p>
-                                    <button className={styles.book}>Book now</button>
+                                    <button onClick={gotoservice} className={styles.book}>Book now</button>
                                 </div>
                                 <div style={{ width: "70%", marginTop: "auto" }}>
                                     <img src={electrical} alt="Electrical" />
@@ -155,7 +160,7 @@ const Dashboard: React.FC = () => {
                                 <div style={{ width: "50%", border: "0px solid white", paddingBottom: "13px" }}>
                                     <h4 style={{ marginLeft: "-10px" }}>10% OFF</h4>
                                     <p style={{color:"white"}}>On first baking order</p>
-                                    <button className={styles.book}>Book now</button>
+                                    <button onClick={gotoservice} className={styles.book}>Book now</button>
                                 </div>
                                 <div style={{ width: "70%", marginTop: "auto" }}>
                                     <img src={baker} alt="Baker" />
@@ -181,10 +186,10 @@ const Dashboard: React.FC = () => {
                     </div>
                     <div className={styles.horizontalScroll2}>
                         <div className={styles.scrollContainer2}>
-                            <IonCard style={{ flex: "0 0 auto", width: "300px", height: "200px", marginRight: "10px", backgroundColor: "#0f0f2b", display: "flex", color: "white", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+                            <IonCard style={{ flex: "0 0 auto", width: "300px", height: "200px", marginRight: "10px", background: "red", display: "flex", color: "white", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
                                 <div style={{ textAlign: "center", width: "250px", display: "block", border: "0px solid white", paddingLeft: "1rem" }}>
                                     <h1 style={{ paddingBottom: "2rem", fontSize: "2.2rem" }}>Electronics</h1>
-                                    <button style={{ padding: "2px", borderRadius: "12px", width: "50%", background: "white", color: "black" }}>Check it out</button>
+                                    <button style={{ padding: "5px", borderRadius: "12px", width: "50%", background: "white", color: "black" }}>Check it out</button>
                                 </div>
                                 <div style={{ width: "60%", border: "0px solid white" }}>
                                     <img style={{ width: "100%", }} src={eng} alt="Electronics" />
@@ -192,26 +197,31 @@ const Dashboard: React.FC = () => {
                             </IonCard>
                             <IonCard style={{ flex: "0 0 auto", width: "300px", height: "200px", marginRight: "10px", backgroundColor: "#0f0f2b", display: "flex", color: "white", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
                                 <div style={{ textAlign: "center", width: "250px", display: "block", border: "0px solid white", paddingLeft: "1rem" }}>
-                                    <h1 style={{ paddingBottom: "2rem", fontSize: "2.2rem" }}>Electronics</h1>
-                                    <button style={{ padding: "2px", borderRadius: "12px", width: "50%", background: "white", color: "black" }}>Check it out</button>
+                                    <h1 style={{ paddingBottom: "2rem", fontSize: "2.2rem" }}>CCTV installation</h1>
+                                    <button onClick={gotoservice} style={{ padding: "5px", borderRadius: "12px", width: "50%", background: "white", color: "black" }}>Check it out</button>
                                 </div>
                                 <div style={{ width: "60%", border: "0px solid white" }}>
-                                    <img style={{ width: "100%", }} src={eng} alt="Electronics" />
+                                    <img style={{ width: "100%", }} src={camera} alt="CCT" />
                                 </div>
                             </IonCard>
                             <IonCard style={{ flex: "0 0 auto", width: "300px", height: "200px", marginRight: "10px", backgroundColor: "#0f0f2b", display: "flex", color: "white", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
                                 <div style={{ textAlign: "center", width: "250px", display: "block", border: "0px solid white", paddingLeft: "1rem" }}>
-                                    <h1 style={{ paddingBottom: "2rem", fontSize: "2.2rem" }}>Electronics</h1>
-                                    <button style={{ padding: "2px", borderRadius: "12px", width: "50%", background: "white", color: "black" }}>Check it out</button>
+                                    <h1 style={{ paddingBottom: "2rem", fontSize: "2.2rem" }}>Hospitality</h1>
+                                    <button onClick={gotoservice} style={{ padding: "5px", fontSize:"900", borderRadius: "12px", width: "50%", background: "white", color: "black" }}>Check it out</button>
                                 </div>
                                 <div style={{ width: "60%", border: "0px solid white" }}>
-                                    <img style={{ width: "100%", }} src={eng} alt="Electronics" />
+                                    <img style={{ width: "100%", }} src={hospitality} alt="Hospitality" />
                                 </div>
                             </IonCard>
                         </div>
                     </div>
                     <div style={{ borderTop: "0px solid black" }} className="verified">
                         <div style={{border:"0px solid black", paddingLeft:"10px"}}>View our office Branches</div>
+                        <div className={styles.map}>
+                            <div className={styles.glass}>
+                                <h2>Coming soon...</h2>
+                            </div>
+                        </div>
                     </div>
                 </IonContent>
                 <BottomNav />
