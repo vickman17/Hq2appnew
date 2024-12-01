@@ -9,9 +9,9 @@ import {useHistory} from "react-router-dom";
 
 const Profile: React.FC=()=>{
  const userInfo = sessionStorage.getItem("userInfo");
- const Data = JSON.parse(userInfo);
- const firstName = Data.firstName;
- const lastName = Data.lastName;
+ //const Data = JSON.parse(userInfo);
+ const firstName = userInfo.firstName;
+ const lastName = userInfo.lastName;
 
 
     useEffect(() => {
