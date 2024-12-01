@@ -8,10 +8,12 @@ import MainPic from "../components/MainPic";
 import {useHistory} from "react-router-dom";
 
 const Profile: React.FC=()=>{
- const userInfo = sessionStorage.getItem("userInfo");
- //const Data = JSON.parse(userInfo);
- const firstName = userInfo.firstName;
- const lastName = userInfo.lastName;
+ const userInfoString = sessionStorage.getItem("userInfo");
+  const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
+
+  // Access properties with fallback in case userInfo is null
+  const firstName = userInfo?.firstName || "Guest";
+  const lastName = userInfo?.lastName || "";
 
 
     useEffect(() => {
@@ -33,7 +35,7 @@ const Profile: React.FC=()=>{
                 <div className={style.info}>
                     <div className={style.tag}>
                         <div className={style.name}>
-                 {`${firstName} {lastName}`}
+                 {`${firstName} ${lastName}`}
               </div>
                         <div className={style.role}>Client</div>
                     </div>
