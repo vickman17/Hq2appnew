@@ -1,1 +1,40 @@
 
+name: Hq2app
+
+on:
+  push:
+    branches:
+      - main # You can change this to your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '22' # or your preferred version of Node.js
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        npm install -g ionic firebase-tools
+        npm install
+
+    # Step 4: Build the Ionic React app
+    - name: Build the Ionic project
+      run: |
+        ionic build --prod
+
+    # Step 5: Deploy to Firebase Hosting
+    - name: Deploy to Firebase
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: |
+        firebase deploy --only hosting --token $FIREBASE_TOKEN
