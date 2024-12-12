@@ -48,7 +48,7 @@ const Chat: React.FC = () => {
     }
   }, []);
 
-  // Fetch messages
+  //Fetch messages
   useEffect(() => {
     const fetchMessages = async () => {
       try {
