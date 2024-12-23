@@ -78,8 +78,8 @@
 .partialModal {
   height: 85vh; /* Adjust the height as needed */
   margin-top: auto; /* Positions modal at the bottom */
-  border-top-right-radius: 3rem;
-  border-top-left-radius: 3rem; /* Rounded top corners for better visual appeal */
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem; /* Rounded top corners for better visual appeal */
   overflow-y: auto; /* Enable scroll for long content */
   padding: 16px; 
   background: var(--ion-background-color);

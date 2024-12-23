@@ -108,9 +108,9 @@ const Dashboard: React.FC = () => {
                         <div className={styles.what}>What service are you lookng for?</div>
                         <div className={styles.inputContainer}>
                             <IonIcon icon={searchOutline}></IonIcon>
-                            <IonInput
-                                type="search"
-                                value={searchQuery}
+                            <input
+                                type="text"
+                                
                                 placeholder="I am looking for..."
                                 className={styles.search}
                              //  {/* onIonInput={(e) => setSearchQuery(e.detail.value!)} */}
@@ -134,40 +134,7 @@ const Dashboard: React.FC = () => {
                     )}
 
                     
-                    <div className={styles.horizontalScroll}>
-                        <div className={styles.scrollContainer}>
-                            <IonCard style={{ flex: "0 0 auto", width: "290px", height: "130px", marginRight: "10px", backgroundColor: "#0f0f2b", display: "flex", color: "white", alignItems: "center", justifyContent: "space-between", textAlign: "center", borderRadius: "6px" }}>
-                                <div style={{ width: "50%", border: "0px solid white", color:"white", paddingBottom: "13px"}}>
-                                    <h4 style={{ marginLeft: "-20px" }}>25% OFF</h4>
-                                    <p style={{color:"white"}}>On first painting order</p>
-                                    <button onClick={gotoservice} className={styles.book}>Book now</button>
-                                </div>
-                                <div style={{ width: "70%", marginTop: "auto" }}>
-                                    <img src={painter} alt="Painter" />
-                                </div>
-                            </IonCard>
-                            <IonCard style={{ flex: "0 0 auto", width: "290px", height: "130px", marginRight: "10px", backgroundColor: "green", display: "flex", color: "white", alignItems: "center", justifyContent: "center", textAlign: "center", borderRadius: "6px" }}>
-                                <div style={{ width: "50%", border: "0px solid white", paddingBottom: "13px" }}>
-                                    <h4 style={{ marginLeft: "-20px" }}>15% OFF</h4>
-                                    <p style={{color:"white"}}>On first electrical order</p>
-                                    <button onClick={gotoservice} className={styles.book}>Book now</button>
-                                </div>
-                                <div style={{ width: "70%", marginTop: "auto" }}>
-                                    <img src={electrical} alt="Electrical" />
-                                </div>
-                            </IonCard>
-                            <IonCard style={{ flex: "0 0 auto", width: "290px", height: "130px", marginRight: "10px", backgroundColor: "green", display: "flex", color: "white", alignItems: "center", justifyContent: "center", textAlign: "center", borderRadius: "6px" }}>
-                                <div style={{ width: "50%", border: "0px solid white", paddingBottom: "13px" }}>
-                                    <h4 style={{ marginLeft: "-10px" }}>10% OFF</h4>
-                                    <p style={{color:"white"}}>On first baking order</p>
-                                    <button onClick={gotoservice} className={styles.book}>Book now</button>
-                                </div>
-                                <div style={{ width: "70%", marginTop: "auto" }}>
-                                    <img src={baker} alt="Baker" />
-                                </div>
-                            </IonCard>
-                        </div>
-                    </div>
+
                     <div style={{ border: "0px solid black" }}>
                         <IonLabel className={styles.lab}>
                             Category<p onClick={()=>history.push('/services')}>see all</p>
@@ -216,7 +183,7 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <div style={{ borderTop: "0px solid black" }} className="verified">
-                        <div style={{border:"0px solid black", paddingLeft:"10px"}}>View our office Branches</div>
+                        <div style={{border:"0px solid black", paddingLeft:"10px", marginTop:".6rem"}}>View our office Branches</div>
                         <div className={styles.map}>
                             <div className={styles.glass}>
                                 <h2>Coming soon...</h2>

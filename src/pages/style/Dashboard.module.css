@@ -5,31 +5,28 @@
     color: var(--ion-text-color);
 }
 
-.book {
-    padding: 6px;
-    border-radius: 8px;
-    background: transparent;
-    border: 1px solid grey;
-    color: white;
-}
+
 
 .inputContainer {
-    border: 1px solid var(--ion-border-line);
-    width: 90%;
+    border: 0px solid var(--ion-border-line);
+    width: 80%;
     margin: auto;
-    border-radius: 3px;
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.3);
     display: flex;
     align-items: center;
-    padding-inline: 5px;
+    padding-left: 10px;
+    padding-block: 2px;
 }
 
 .search {
-    width: 92%;
-    height: 10px;
+    width: 90%;
+    margin-right: auto;
+    height: 37px;
     border-radius: 5px;
-    padding: 5px;
+    padding: 4px;
     background: transparent;
-    border: none;
+    border: 0px solid white;
     outline: none;
     color: var(--ion-text-color);
     text-align: center;
@@ -164,6 +161,7 @@
     background-size: cover;
     border-radius: 15px;
     height: 150px;
+    margin-top: 2rem;
 }
 
 .glass {

@@ -34,6 +34,7 @@ import Transition from './components/Transition';
 import Chat from './pages/Chat';
 import SplashScreen from './components/SplashScreen';
 import IntroPage from './pages/IntroPage';
+import Promo from "./components/Promo.tsx";
 
 setupIonicReact()
 
@@ -98,6 +99,7 @@ const App: React.FC = () => {
                 <Route path='/Signup' component={Signup} />
                 <Route path='/intro' component={IntroPage}/>
                 <Route path="/splash" component={SplashScreen}/>
+                <Route path="/promo" component={Promo} />
                 <ProtectedRoute path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path='/notification' component={Notification}/>
                 <ProtectedRoute path="/profile" component={Profile} />
