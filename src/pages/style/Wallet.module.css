@@ -1,0 +1,11 @@
+.add{
+    padding-block: 15px;
+    padding-inline: 25px;
+    color: black;
+    margin-right: 1rem;
+    border-radius: 9px;
+}
+
+.history{
+    color: black;
+}
