@@ -30,7 +30,7 @@ const Login: React.FC = () => {
     document.body.style.overflowX = "hidden";
   }, []);
 
-  const endpoint = "http://localhost/api/login.php";
+  const endpoint = "http://localhost/hq2ClientApi/login.php";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);

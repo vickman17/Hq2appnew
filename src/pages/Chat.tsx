@@ -231,44 +231,6 @@ const Chat: React.FC = () => {
             )}
           </div>
         </div>
-        <IonModal isOpen={isJobModalOpen} className={style.modal} onDidDismiss={() => setIsJobModalOpen(false)}>
-          {jobDetails ? (
-            <div>
-              <div className={style.modalHead}>JOB DETAILS</div>
-              <div className={style.skill}>{jobDetails?.skill}</div>
-              <div className={style.set}>
-                <fieldset className={style.field}>
-                  <legend className={style.add}>Address</legend>
-                  <div className={style.row}>
-                    <div className={style.colHead}>State</div>
-                    <div className={style.colBody}>{jobDetails?.state}</div>
-                  </div>
-                  <div className={style.row}>
-                    <div className={style.colHead}>Local Government</div>
-                    <div className={style.colBody}>{jobDetails?.local_government}</div>
-                  </div>
-                  <div className={style.row}>
-                    <div className={style.colHead}>Address</div>
-                    <div className={style.colBody}>{jobDetails?.address}</div>
-                  </div>
-                </fieldset>
-              </div>
-              <div className={style.set}>
-                <fieldset className={style.field}>
-                  <legend className={style.add}>Additional Details</legend>
-                  <div className={style.row}>
-                    <div className={style.colBody}>{jobDetails?.additional_details}</div>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-          ) : (
-            <div>Loading...</div>
-          )}
-          <button onClick={() => setIsJobModalOpen(false)} style={{ margin: "auto", paddingBlock: ".6rem", marginBottom: "5px", width: "90%", fontSize: "17px", borderRadius: "7px", background: "var(--ion-company-wood)", color: "white" }}>
-            Close
-          </button>
-        </IonModal>
       </IonContent>
     </IonPage>
   );

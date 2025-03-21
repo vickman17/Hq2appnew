@@ -44,7 +44,7 @@ const EditProfile: React.FC = () => {
         formData.append("userId", userId);
 
         try {
-            const response = await fetch("http://localhost/api/uploadProfile.php", {
+            const response = await fetch("http://localhost/hq2ClientApi/uploadProfile.php", {
                 method: "POST",
                 body: formData,
             });
@@ -81,7 +81,7 @@ const EditProfile: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://localhost/api/uploadImage.php", {
+      const response = await fetch("http://localhost/hq2ClientApi/uploadImage.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

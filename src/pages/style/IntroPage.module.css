@@ -145,7 +145,14 @@
   margin-top: 0rem;
   padding-block: 9px;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
   background: rgb(230, 230, 230);
+}
+
+.icon{
+ width: 20px; 
+ margin-left: 10px;
 }
 
 .detail{

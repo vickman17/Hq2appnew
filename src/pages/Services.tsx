@@ -42,7 +42,7 @@ interface RouteParams {
 }
 
 const fetchCategories = async (): Promise<Category[]> => {
-  const url = 'http://localhost/api/fetchCategory.php';
+  const url = 'http://localhost/hq2ClientApi/fetchCategory.php';
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Network response was not ok');
@@ -126,7 +126,7 @@ const Services: React.FC = () => {
     setLoader(true);
 
     try {
-      const response = await fetch(`http://localhost/api/fetchSub.php?categoryId=${category.id}`);
+      const response = await fetch(`http://localhost/hq2ClientApi/fetchSub.php?categoryId=${category.id}`);
       if (!response.ok) {
         throw new Error('Failed to fetch subcategories');
       }
@@ -198,7 +198,7 @@ const Services: React.FC = () => {
         images: base64Images,
       };
   
-      const response = await fetch('http://localhost/api/saveJobRequest.php', {
+      const response = await fetch('http://localhost/hq2ClientApi/saveJobRequest.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -215,7 +215,7 @@ const Services: React.FC = () => {
   
       // Fetch supervisors by profession
       const supervisorsResponse = await fetch(
-        `http://localhost/api/supervisors.php?profession=${encodeURIComponent(selectedCategory?.category_name || '')}`,
+        `http://localhost/hq2ClientApi/supervisors.php?profession=${encodeURIComponent(selectedCategory?.category_name || '')}`,
         {
           method: 'GET',
         }
@@ -353,7 +353,7 @@ useEffect(() => {
                   key={category.id}
                   className={style.categoryItem}
                   style={{
-                    backgroundImage: `url(http://localhost/api/${category.category_pics})`,
+                    backgroundImage: `url(http://localhost/hq2ClientApi/${category.category_pics})`,
                   }}
                   onClick={() => handleCategoryClick(category)}
                 >

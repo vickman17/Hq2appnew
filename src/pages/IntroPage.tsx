@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { IonContent, IonPage, IonModal, IonButton, IonSegment, IonSegmentButton, IonLabel } from "@ionic/react";
 import style from "./style/IntroPage.module.css";
 import { useHistory } from "react-router";
+import axios from "axios";
+
 
 const IntroPage: React.FC = () => {
   const content = [
@@ -40,7 +42,8 @@ const IntroPage: React.FC = () => {
   const logo = "/assets/Icon.svg";
   const facebook = "/assets/svg/facebook.svg";
   const google = "/assets/svg/google.svg";
-
+  const emailSvg = "/assets/svg/email.svg";
+  const passwordSvg = "/assets/svg/password.svg";
 
   /**********************LOGIN *****************************/
 
@@ -49,7 +52,8 @@ const IntroPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [text, setText] = useState('');
   const history = useHistory();
-  
+  const [, forceUpdate] = useState(0);
+
   const [toast, setToast] = useState<boolean>(false)
   const [statusColor, setStatusColor] = useState("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -69,7 +73,7 @@ const IntroPage: React.FC = () => {
     document.body.style.overflowX = "hidden";
   }, []);
 
-  const endpoint = "http://localhost/api/login.php";
+  const endpoint = "http://localhost/hq2ClientApi/login.php";
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsSubmitting(true);
@@ -94,11 +98,13 @@ const IntroPage: React.FC = () => {
             setText('Login successful!');
             setStatusColor('success');
             setToast(true);
+            closeModal();
             localStorage.setItem("userInfo", JSON.stringify(data.user));
             localStorage.setItem("token", data.token) ;
             sessionStorage.setItem("userInfo", JSON.stringify(data.user));
             sessionStorage.setItem("token", data.token) ;// Save user info to context
             history.push('/dashboard');
+            forceUpdate((prev) => prev + 1);
         } else {
             setIsSubmitting(false);
             setText(data.error );
@@ -123,6 +129,101 @@ const IntroPage: React.FC = () => {
   
   /***************************************END OF LOGIN */
   
+
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    signupEmail: "",
+    phone: "",
+    signupPassword: "",
+    confirmPassword: "",
+    role: "clients",
+  });
+  
+  const [passwordError, setPasswordError] = useState(""); // Track password mismatch error
+  
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, []);
+
+  
+
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const createPaystackAccount = async (user: { email: string; first_name: string; last_name: string, user_id: string }) => {
+    try {
+      const response = await axios.post("http://localhost/hq2ClientApi/createVirtualAccount.php", user);
+      console.log("Paystack Account Created:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error creating Paystack account:", error);
+    }
+  };
+  
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent default form submission
+  
+    if (formData.signupPassword !== formData.confirmPassword) {
+      setPasswordError("Passwords do not match.");
+      return; // Stop form submission if passwords don't match
+    } else {
+      setPasswordError(""); // Clear error if passwords match
+    }
+  
+    setIsSubmitting(true); // Disable button when form is being submitted
+  
+    try {
+      const response = await fetch("http://localhost/hq2ClientApi/register.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      console.log(formData);
+      const data = await response.json(); // Always parse the JSON response
+  
+      if (data.success) {
+        setStatusColor("success");
+        setText("Registration successful, We sent you an OTP to your email");
+        createPaystackAccount({ email: formData.signupEmail, first_name: formData.firstName, last_name: formData.lastName, user_id: data.user_id });
+        setSelectedSegment('service1');
+        setToast(true);
+      } else {
+        const errorDetail = data.error || "An unknown error occurred.";
+        setText(errorDetail);
+        setStatusColor("danger");
+        setToast(true);
+      }
+    } catch (error) {
+      setText("An error occurred. Please try again.");
+      setStatusColor("danger");
+      setToast(true);
+    } finally {
+      setIsSubmitting(false); // Re-enable button after submission completes
+    }
+  };
+  
+
+
+
   return (
     <IonPage
       className={style.blend}
@@ -215,7 +316,7 @@ const IntroPage: React.FC = () => {
                     </div>                    
                   </div>
                   <div className={style.butCont}>
-                    <button className={style.but}>Login</button>
+                    <button className={style.but} disabled={isSubmitting}>{isSubmitting ? "Almost there..." : "Login" }</button>
                   </div>
                   <div className={style.forgot}>
                     forgot password?
@@ -226,13 +327,13 @@ const IntroPage: React.FC = () => {
                 </form>
               )}
               {selectedSegment === "service2" && (
-                <form>
+                <form onSubmit={handleSubmit}>
                 <div className={style.double}>
                   <div className={style.col}>
                   <div className={style.inputCont}>
                     <label className={style.labInput}>First name</label>
                     <div className={style.input}>
-                      <input placeholder="john" className={style.detail} type="text" />
+                      <input placeholder="john" name="firstName" value={formData.firstName} onChange={handleChange} className={style.detail} type="text" />
                     </div>                    
                   </div>
                   </div>
@@ -240,7 +341,7 @@ const IntroPage: React.FC = () => {
                   <div className={style.inputCont}>
                   <label className={style.labInput}>Last name</label>
                   <div className={style.input}>
-                    <input placeholder="doe" className={style.detail} type="text" />
+                    <input placeholder="doe" name="lastName" value={formData.lastName} onChange={handleChange} className={style.detail} type="text" />
                   </div>                    
                 </div>
                   </div>
@@ -248,29 +349,41 @@ const IntroPage: React.FC = () => {
                 <div className={style.inputCont}>
                   <label className={style.labInput}>Email</label>
                   <div className={style.input}>
-                    <input placeholder="johndoe@gmail.com" className={style.detail} type="text" />
+                  <div className={style.icon}>
+                    <img src={emailSvg} />
+                  </div>
+                    <input placeholder="johndoe@gmail.com" name="signupEmail" value={formData.signupEmail} onChange={handleChange} className={style.detail} type="text" />
                   </div>                    
                 </div>
                 <div className={style.inputCont}>
                 <label className={style.labInput}>Phone number</label>
                 <div className={style.input}>
-                  <input className={style.detail} type="text" />
+                  <div className={style.icon} style={{width: "10%"}}>
+                    +234
+                  </div>
+                  <input className={style.detail} name="phone" value={formData.phone} onChange={handleChange} type="text" />
               </div>                    
               </div>
                 <div className={style.inputCont}>
                   <label className={style.labInput}>Password</label>
-                  <div className={style.input}>
-                    <input className={style.detail} type="text" />
+                  <div className={style.input} style={{border: passwordError ? "1px solid red" : ""}}>
+                  <div className={style.icon}>
+                    <img src={passwordSvg} />
+                  </div>
+                    <input className={style.detail} name="signupPassword" value={formData.signupPassword} onChange={handleChange} type="text" />
                   </div>                    
                 </div>
                   <div className={style.inputCont}>
                   <label className={style.labInput}>Confirm Password</label>
-                  <div className={style.input}>
-                    <input className={style.detail} type="text" />
+                  <div className={style.input} style={{border: passwordError ? "1px solid red" : ""}}>
+                  <div className={style.icon}>
+                    <img src={passwordSvg} />
+                  </div>
+                    <input className={style.detail} name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} type="text" />
                   </div>                    
                 </div>
                 <div className={style.butCont}>
-                  <button className={style.but}>Sign Up</button>
+                  <button className={style.but} type="submit" disabled={isSubmitting}>{isSubmitting ? "Setting Account" : "Sign up"}</button>
                 </div>
                 <div className={style.not}>
                     By Signing up you agree to our Terms of Service and Data Privacy

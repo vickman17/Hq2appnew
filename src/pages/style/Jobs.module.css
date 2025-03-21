@@ -12,4 +12,13 @@
 
 .segment{
     background: var(--ion-menu-head);
+    border: 0px solid;
+    width: 95%;
+    margin: auto;
+    margin-top: 3rem;
+    border-radius: 1rem;
+}
+
+.segBut{
+    --border-radius: 1rem;
 }

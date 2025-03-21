@@ -12,7 +12,7 @@ const MainPic: React.FC = () => {
     // Fetch profile image on component mount
     const fetchProfileImage = async () => {
       try {
-        const response = await fetch(`http://localhost/api/getProfile.php?userId=${userId}`);
+        const response = await fetch(`http://localhost/hq2ClientApi/getProfile.php?userId=${userId}`);
         const data = await response.json();
 
         if (data.status === "success" && data.profile_picture) {
